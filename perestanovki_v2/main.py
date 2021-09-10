@@ -3,14 +3,19 @@ fout = open("/home/oybek/menshikov/perestanovki_v2/output.txt","a")
 
 chars = [char for char in fin.readline()]
 chars_len = len(chars)
-is_used = [False for i in range(0, chars_len)]
+
+used_chars = []
 
 def permutations(m, prefix = []):
+    global used_chars
     if m == 0:
         print(prefix)
         return
     
     for i in chars:
+        if i in used_chars:
+            continue
+        
         prefix.append(i)
         permutations(m-1, prefix)
         prefix.pop()
